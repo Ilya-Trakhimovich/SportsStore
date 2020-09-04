@@ -1,0 +1,12 @@
+﻿@model SportsStore.Domain.Entities.Cart
+
+<div class="navbar-text">
+    @Html.ActionLink("Checkout", "Index", "Cart",
+    new { returnUrl = Request.Url.PathAndQuery},
+    new { @class = "btn btn-secondary" })
+</div>
+<div class="navbar-text navbar">
+    <b>Your cart:</b>
+    @Model.Lines.Sum(x => x.Quantity) item(s)
+    @Model.ComputeTotalValue().ToString("c")
+</div>

@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace SportsStore.Domain.Abstract
 {
-    public interface IProductRepository
+    public interface IOrderProcessor
     {
-        IEnumerable<Product> Products { get; }
-        void SaveProduct(Product product);
+        void ProcessOrder(Cart cart, ShippingDetails shippingDetails);
     }
 }

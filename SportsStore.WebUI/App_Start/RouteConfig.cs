@@ -21,7 +21,7 @@ namespace SportsStore.WebUI
                     controller = "Product",
                     action = "ShowProductList",
                     category = (string)null,
-                    page = 1
+                    page = 0
                 });
 
             routes.MapRoute(

@@ -22,7 +22,7 @@ namespace SportsStore.UnitTests.TestController
             //Arrange
             Mock<IProductRepository> mock = new Mock<IProductRepository>();
             mock.Setup(m => m.Products).Returns(new Product[]
-                { 
+                {
                 new Product {ProductId = 1, Name = "p1", Category = "Apple"},
                 new Product {ProductId = 2, Name = "p2", Category = "Apple"},
                 new Product {ProductId = 3, Name = "p3", Category = "Plums"},
@@ -39,6 +39,27 @@ namespace SportsStore.UnitTests.TestController
             Assert.AreEqual(result[0], "Apple");
             Assert.AreEqual(result[1], "Oranges");
             Assert.AreEqual(result[2], "Plums");
+        }
+
+        [TestMethod]
+        public void Menu_IndicatesSelectedCategory_Returns_CorrectCategory()
+        {
+            //Arrange
+            Mock<IProductRepository> mock = new Mock<IProductRepository>();
+            mock.Setup(m => m.Products).Returns(new Product[]
+                {
+                    new Product { ProductId = 1, Category = "A"},
+                    new Product{ ProductId = 2, Category = "B"}
+                });
+
+            NavController controller = new NavController(mock.Object);
+            string categoryToSelect = "A";
+
+            //Act
+            string result = controller.Menu(categoryToSelect).ViewBag.SelectedCategory;
+
+            //Assert
+            Assert.AreEqual(categoryToSelect, result);
         }
     }
 }
