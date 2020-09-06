@@ -2,6 +2,7 @@
 using SportsStore.Domain.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Common.CommandTrees;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,19 @@ namespace SportsStore.Domain.Concrete
             {
                 return _context.Products;
             }
+        }
+
+        public Product DeleteProduct(int productId)
+        {
+            Product dbEntry = _context.Products.Find(productId);
+
+            if (dbEntry != null)
+            {
+                _context.Products.Remove(dbEntry);
+                _context.SaveChanges();
+            }
+
+            return dbEntry;
         }
 
         public void SaveProduct(Product product)
