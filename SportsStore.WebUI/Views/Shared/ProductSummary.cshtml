@@ -1,12 +1,18 @@
 ﻿@model SportsStore.Domain.Entities.Product
 
 <div class="card">
+    @if (Model.ImageData != null)
+    {
+        <div class="float-left" style="margin-right: 10px;">
+            <img class="img-thumbnail" width="75" height="75" src="@Url.Action("GetImage", "Product", new { Model.ProductId})" />
+        </div>
+    }
     <h3>
         <strong>@Model.Name</strong>
         <span class="float-right badge badge-primary">@Model.Price.ToString("c")</span>
     </h3>
     @using (Html.BeginForm("AddToCart", "Cart"))
-    { 
+    {
         <div class="float-right">
             @Html.HiddenFor(x => x.ProductId)
             @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
